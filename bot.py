@@ -29,7 +29,7 @@ def start(update,context):
 
 @run_async   
 def help(update,context):
-	update.message.reply_text('If you want to short your long url click /short and then send your long url\nIf you want to unshort the short url click /unshort and then send your short url')
+	update.message.reply_text('If you want to shorten your long url click /short and then send your long url\nIf you want to unshort the shorted url click /unshort and then send your short url')
 
 @run_async   
 def unshort(update,context):

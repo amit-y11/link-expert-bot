@@ -12,7 +12,7 @@ import re
 
 
 Api_key=os.environ.get("api_key","")
-s=pyshorteners.Shortener(api_key="Api_key")
+s=pyshorteners.Shortener(api_key=Api_key)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)

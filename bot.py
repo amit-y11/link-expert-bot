@@ -38,6 +38,8 @@ def convert(update,context):
         keyboard = [[InlineKeyboardButton("Short", callback_data='short'),InlineKeyboardButton("Unshort", callback_data='unshort')]]
         reply_markup = InlineKeyboardMarkup(keyboard)
         update.message.reply_text('Select from below options whether you want to short or unshort your url', reply_markup=reply_markup)
+    elif link=="/donate":
+        donate(update,context)
     else:
         update.message.reply_text("<i>⚠️ Url must start with http:// or https:// and it should not have spaces in it.</i>",parse_mode=telegram.ParseMode.HTML)
 
@@ -66,9 +68,9 @@ def main():
     updater = Updater(token,use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('start',start))
-    dp.add_handler(CommandHandler ('help',help))
+    dp.add_handler(CommandHandler('help',help))
     dp.add_handler(MessageHandler(Filters.text,convert))
-    dp.add_handler(CommandHandler ('donate',donate))
+    dp.add_handler(CommandHandler('donate',donate))
     dp.add_handler(CallbackQueryHandler(button))
     updater.start_polling()
     updater.idle()

@@ -62,8 +62,8 @@ def inlinequery(update,context):
 	unshortener=UnshortenIt()
 	unshortlink=unshortener.unshorten(query)
 	
-	results=[InlineQueryResultArticle(id=uuid4(),title="short",input_message_content=InputTextMessageContent(shortlink)),
-                     InlineQueryResultArticle(id=uuid4(),title="unshort",input_message_content=InputTextMessageContent(unshortlink))]
+	results=[InlineQueryResultArticle(id=uuid4(),title="short",input_message_content=InputTextMessageContent(shortlink), description="Click to shorten the link"),
+                     InlineQueryResultArticle(id=uuid4(),title="unshort",input_message_content=InputTextMessageContent(unshortlink), description="Click to unshort the link")]
 	update.inline_query.answer(results)
 		
 def donate(update,context):

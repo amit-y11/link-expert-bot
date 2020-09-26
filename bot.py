@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 @run_async
 def start(update,context):
     first=update.message.chat.first_name
-    update.message.reply_text('Hi! '+str(first)+' \n\nWelcome to Url Expert Bot.\nThis bot can short long urls , and also unshort various short urls type /help to know how to use this bot.')
+    update.message.reply_text('Hi! '+str(first)+' \n\nWelcome to Link Expert Bot.\nThis bot can short long urls , and also unshort various short urls type /help to know how to use this bot.')
 
 @run_async   
 def help(update,context):

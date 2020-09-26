@@ -1,14 +1,14 @@
 from telegram.ext.dispatcher import run_async
-from telegram.ext import Updater,CommandHandler,MessageHandler,Filters,ConversationHandler,CallbackQueryHandler
+from telegram.ext import Updater,CommandHandler,MessageHandler,Filters,ConversationHandler,CallbackQueryHandler,InlineQueryHandler
 import telegram
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup,InputTextMessageContent,InlineQueryResultArticle
 import logging
 import os
 import unshortenit
 from unshortenit import UnshortenIt
 import pyshorteners
 import re
-
+from uuid import uuid4
 
 
 Api_key=os.environ.get("api_key","")
@@ -53,6 +53,18 @@ def button(update,context):
     if a=="short":
         response=s.bitly.short(link)
         query.edit_message_text("Shorted url 👇🏼:\n"+str(response))
+
+def inlinequery(update,context):
+	query = update.inline_query.query
+	###for short links#######
+	shortlink=s.bitly.short(query)
+	#####for unshort link####$#$
+	unshortener=UnshortenIt()
+	unshortlink=unshortener.unshorten(query)
+	
+	results=[InlineQueryResultArticle(id=uuid4(),title="short",input_message_content=InputTextMessageContent(shortlink)),
+                     InlineQueryResultArticle(id=uuid4(),title="unshort",input_message_content=InputTexrMessageContent(unshortlink))]
+	update.inline_query.answer(results)
 		
 def donate(update,context):
     update.message.reply_text("You can support me by donating any amount you wish by using the following *Payment Options* \n\n1\. [Paypal](https://paypal.me/yamit11) \n2\. UPI : `amity11@kotak` \n3\. [Debit/Credit cards/UPI](https://rzp.io/l/amity11)\n\n",parse_mode=telegram.ParseMode.MARKDOWN_V2)
@@ -70,6 +82,7 @@ def main():
     dp.add_handler(CommandHandler('donate',donate))
     dp.add_handler(MessageHandler(Filters.text,convert))
     dp.add_handler(CallbackQueryHandler(button))
+    dp.add_handler(InlineQueryHandler(inlinequery))
     updater.start_polling()
     updater.idle()
 

@@ -24,9 +24,11 @@ def start(update,context):
     first=update.message.chat.first_name
     update.message.reply_text('Hi! '+str(first)+' \n\nWelcome to Link Expert Bot.\nThis bot can short long urls , and also unshort various short urls type /help to know how to use this bot.')
 
+inlinekeyboard=[[InlineKeyboardButton("Go inline in other chats", switch_inline_query="")]]
+switch_inline=InlineKeyboardMarkup(inlinekeyboard)
 @run_async   
 def help(update,context):
-    update.message.reply_text('Just send the url that you want to short or unshort\n\nNote:<i>⚠️ Url must start with http:// or https:// and it should not have spaces in it.</i>',parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text('Just send the url that you want to short or unshort \nYou can also use this bot in other chats by using inline mode, click below button to go inline in other chats.\n\nNote:<i>⚠️ Url must start with http:// or https:// and it should not have spaces in it.</i>',parse_mode=telegram.ParseMode.HTML,reply_markup=switch_inline)
 
 @run_async
 def convert(update,context):
@@ -53,6 +55,7 @@ def button(update,context):
     if a=="short":
         response=s.bitly.short(link)
         query.edit_message_text("Shorted url 👇🏼:\n"+str(response))
+
 
 def inlinequery(update,context):
 	query = update.inline_query.query

@@ -1,0 +1,23 @@
+{
+    "name": "Link Expert Bot",
+    "description": "Telegram bot for shortening and unshortening links",
+    "author": "Amit",
+    "keywords": [
+        "link shortener",
+        "telegram bots",
+        "bitly",
+        "unshort links"
+    ],
+    "repository": "https://github.com/amit-y11/link-expert-bot",
+    "env":{
+        "bot_token":{
+            "description":"Telegram bot token",
+            "required":"True"
+        },
+        "api_key":{
+            "description":"bit.ly api key",
+            "required":"True"
+        }
+    }
+
+}

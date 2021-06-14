@@ -1,4 +1,4 @@
 telegram==0.0.1
-python-telegram-bot
+python-telegram-bot==12.8
 pyshorteners
 unshortenit
